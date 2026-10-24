@@ -1,8 +1,10 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Level1CodingExam {
+public class Level1CodingExam implements ActionListener {
 
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
@@ -16,9 +18,13 @@ public class Level1CodingExam {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.add(yellow);
+		yellow.addActionListener(this);
 		panel.add(red);
+		red.addActionListener(this);
 		panel.add(blue);
+		blue.addActionListener(this);
 		panel.add(green);
+		green.addActionListener(this);
 		yellow.setBackground(Color.YELLOW);
 		yellow.setOpaque(true);
 		red.setBackground(Color.RED);
@@ -33,6 +39,12 @@ public class Level1CodingExam {
 	public static void main(String[] args) {
 		new Level1CodingExam().run();
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
