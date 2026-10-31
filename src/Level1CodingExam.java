@@ -15,7 +15,6 @@ public class Level1CodingExam implements ActionListener {
 
 	void run() {
 		frame.add(panel);
-		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.add(yellow);
 		yellow.addActionListener(this);
@@ -34,17 +33,45 @@ public class Level1CodingExam implements ActionListener {
 		blue.setBackground(Color.BLUE);
 		blue.setOpaque(true);
 		frame.pack();
+		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
 		new Level1CodingExam().run();
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+		JButton a = (JButton) arg0.getSource();
+		if (a == yellow) {
+			speak("yellow");
+		} else if (a == green) {
+			speak("green");
+		} else if (a == blue) {
+			speak("blue");
+		} else {
+			speak("red");
+		}
 		
+	}
+
+	static void speak(String words) {
+		if (System.getProperty("os.name").contains("Windows")) {
+			String cmd = "PowerShell -Command \"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('"
+					+ words + "');\"";
+			try {
+				Runtime.getRuntime().exec(cmd).waitFor();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				Runtime.getRuntime().exec("say " + words).waitFor();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }
